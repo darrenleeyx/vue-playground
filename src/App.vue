@@ -1,68 +1,37 @@
 <template>
-  <div class="h-screen flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6">
-    <div class="flex h-16 shrink-0 items-center">
-      <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
+  <h1>{{ title }}</h1>
+  <div>
+    <label for="search" class="block text-sm font-medium leading-6 text-gray-900">Quick search</label>
+    <div class="relative mt-2 flex items-center">
+      <input type="text" ref="name" name="search" id="search" class="block w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+      <div class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
+        <kbd class="inline-flex items-center rounded border border-gray-200 px-1 font-sans text-xs text-gray-400">⌘K</kbd>
+      </div>
     </div>
-    <nav class="flex flex-1 flex-col">
-      <ul role="list" class="flex flex-1 flex-col gap-y-7">
-        <li>
-          <ul role="list" class="-mx-2 space-y-1">
-            <li v-for="item in navigation" :key="item.name">
-              <a :href="item.href" :class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
-                <component :is="item.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
-                {{ item.name }}
-                <span v-if="item.count" class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">{{ item.count }}</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <div class="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
-          <ul role="list" class="-mx-2 mt-2 space-y-1">
-            <li v-for="team in teams" :key="team.name">
-              <a :href="team.href" :class="[team.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
-                <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">{{ team.initial }}</span>
-                <span class="truncate">{{ team.name }}</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="-mx-6 mt-auto">
-          <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800">
-            <img class="h-8 w-8 rounded-full bg-gray-800" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-            <span class="sr-only">Your profile</span>
-            <span aria-hidden="true">Tom Cook</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
   </div>
+  <button type="button" @click="handleClick" class="inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+    Click Me
+    <CheckCircleIcon class="-mr-0.5 h-5 w-5" aria-hidden="true" />
+  </button>
 </template>
 
-<script setup>
-import {
-  CalendarIcon,
-  ChartPieIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
-} from '@heroicons/vue/24/outline'
-
-const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, count: '5', current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, count: '12', current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, count: '20+', current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
-]
-const teams = [
-  { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
-]
+<script>
+export default {
+  name: 'App',
+  data() {
+    return {
+      title: 'My First Vue App 1'
+    }
+  },
+  methods: {
+    handleClick() {
+      console.log(this.$refs.name);
+      this.$refs.name.classList.add('bg-black');
+    }
+  }
+}
 </script>
+
 
 <style lang="css">
 @import 'style.css';
